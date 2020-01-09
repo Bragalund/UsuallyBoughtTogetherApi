@@ -7,8 +7,9 @@ namespace UsuallyBoughtTogetherApi.Repositories
     public interface IProductEntryDataRepo
     {
         List<ProductEntryEntity> GetAllProductEntryEntities();
-        List<ProductEntryEntity> GetAllProductEntryEntitiesFromCountOfDaysBackInTime(int days);
+        List<ProductEntryEntity> GetAllProductEntryEntitiesFromDaysBackInTime(DateTime fromTime);
         List<ProductEntryEntity> SaveProductEntryEntities(List<ProductEntryEntity> productEntryEntities);
         List<ProductEntryEntity> DeleteProductEntryEntitiesOlderThanDate(DateTime dateTime);
+        List<ProductEntryEntity> GetAssociatedVareIds(int vareId);
     }
 }

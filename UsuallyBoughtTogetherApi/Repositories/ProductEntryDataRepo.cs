@@ -1,19 +1,28 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UsuallyBoughtTogetherApi.Entities;
 
 namespace UsuallyBoughtTogetherApi.Repositories
 {
     public class ProductEntryDataRepo : IProductEntryDataRepo
     {
+        
         public List<ProductEntryEntity> GetAllProductEntryEntities()
         {
-            throw new NotImplementedException();
+            using (var context = new PredictionContext())
+            {
+                return context.ProductEntryEntities.ToList();
+            }
         }
 
-        public List<ProductEntryEntity> GetAllProductEntryEntitiesFromCountOfDaysBackInTime(int days)
+        public List<ProductEntryEntity> GetAllProductEntryEntitiesFromDaysBackInTime(DateTime dateTime)
         {
-            throw new NotImplementedException();
+            using (var context = new PredictionContext())
+            {
+                return context.ProductEntryEntities.Where(productEntryEntity => productEntryEntity.Created < dateTime)
+                    .ToList();
+            }
         }
 
         public List<ProductEntryEntity> SaveProductEntryEntities(List<ProductEntryEntity> productEntryEntities)
@@ -24,6 +33,15 @@ namespace UsuallyBoughtTogetherApi.Repositories
         public List<ProductEntryEntity> DeleteProductEntryEntitiesOlderThanDate(DateTime dateTime)
         {
             throw new NotImplementedException();
+        }
+
+        public List<ProductEntryEntity> GetAssociatedVareIds(int vareId)
+        {
+            using (var context = new PredictionContext())
+            {
+                return context.ProductEntryEntities.Where(productEntity => productEntity.ProductId == vareId).ToList();
+            }
+            
         }
     }
 }

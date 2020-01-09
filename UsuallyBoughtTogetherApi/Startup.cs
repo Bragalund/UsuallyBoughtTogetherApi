@@ -41,7 +41,7 @@ namespace UsuallyBoughtTogetherApi
             });
             
             // Dependecy injection
-            services.AddTransient<ITrainerService, TrainerService>();
+            services.AddTransient<IPredictionService, PredictionService>();
             services.AddTransient<IProductEntryDataRepo, ProductEntryDataRepo>();
         }
 
