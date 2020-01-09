@@ -434,3 +434,5 @@ fabric.properties
 
 .idea/
 UsuallyBoughtTogetherApi/obj
+UsuallyBoughtTogetherApi.tests/obj
+UsuallyBoughtTogetherApi.tests/bin
