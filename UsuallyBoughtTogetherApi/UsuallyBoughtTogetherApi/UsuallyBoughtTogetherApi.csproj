@@ -13,6 +13,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.ML" Version="1.4.0" />
     <PackageReference Include="Microsoft.ML" Version="1.4.0" />
     <!-- <FrameworkReference Include="Microsoft.AspNetCore.App" /> -->
     <PackageReference Include="Microsoft.ML.Recommender" Version="0.16.0" />
@@ -58,6 +59,10 @@
 
   <ItemGroup>
     <_RazorDebugSymbolsIntermediatePath Remove="obj\Debug\netcoreapp3.0.102\UsuallyBoughtTogetherApi.Razor.pdb" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="MLModels" />
   </ItemGroup>
   
   <PropertyGroup>

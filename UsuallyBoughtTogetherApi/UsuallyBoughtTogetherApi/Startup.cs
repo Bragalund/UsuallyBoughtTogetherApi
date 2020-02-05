@@ -3,16 +3,14 @@ using System.IO;
 using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.ML;
 using Microsoft.ML;
-using Microsoft.ML.Data;
 using Microsoft.OpenApi.Models;
 using UsuallyBoughtTogetherApi.Constants;
+using UsuallyBoughtTogetherApi.Dtos;
 using UsuallyBoughtTogetherApi.Repositories;
 using UsuallyBoughtTogetherApi.Services;
 
@@ -84,13 +82,15 @@ namespace UsuallyBoughtTogetherApi
 
             // Dependency injection (singleton)
             services.AddSingleton<MLContext>();
+            services.AddPredictionEnginePool<ProductEntryDto, CoPurchasePredictionDto>()
+                .FromFile(modelName: "ProductRecommenderModel", filePath:FilePathConstants.RecommenderModelPath, watchForChanges: true);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, PredictionContext dbContext, IPredictionService predictionService)
         {
             // Do migrations if any
-            
+            dbContext.Database.Migrate();
             
             // swagger endpoint
             app.UseSwagger();
@@ -103,6 +103,8 @@ namespace UsuallyBoughtTogetherApi
             {
                 endpoints.MapControllers();
             });
+            
+            predictionService.TrainModel("Label", 0.01, 0.025, 0.00001, DateTime.MinValue);
         }
     }
 }

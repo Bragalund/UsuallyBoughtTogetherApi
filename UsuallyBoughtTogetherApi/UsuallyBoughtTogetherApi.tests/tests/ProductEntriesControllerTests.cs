@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Net;
 using System.Net.Http;
 using System.Text;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -10,11 +9,10 @@ using Xunit;
 
 namespace UsuallyBoughtTogetherApi.tests.tests
 {
-    public class
-        ProductEntriesControllerTests : IClassFixture<CustomWebApplicationFactory<UsuallyBoughtTogetherApi.Startup>>
+    public class ProductEntriesControllerTests : IClassFixture<CustomWebApplicationFactory<Startup>>
     {
         private readonly HttpClient _httpClient;
-        private readonly CustomWebApplicationFactory<UsuallyBoughtTogetherApi.Startup> _factory;
+        private readonly CustomWebApplicationFactory<Startup> _factory;
 
         public ProductEntriesControllerTests(CustomWebApplicationFactory<Startup> factory)
         {

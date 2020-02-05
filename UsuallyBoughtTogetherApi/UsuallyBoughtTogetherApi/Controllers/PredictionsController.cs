@@ -12,12 +12,13 @@ namespace UsuallyBoughtTogetherApi.Controllers
         {
             _predictionService = predictionService;
         }
-/*
-        [HttpGet("{id}")]
-        public IActionResult GetBestPredictionForProduct(int id)
+
+        [HttpGet("{id}/{countOfResults}")]
+        public IActionResult GetBestPredictionForProduct(int id, int countOfResults)
         {
-            var result = _predictionService.GetAssociatedVareIdsWithBestPrediction(id, 5);
+            var result = _predictionService.GetAssociatedVareIdsWithBestPrediction(id, countOfResults);
+            return Ok(result);
         }
-        */
+        
     }
 }
