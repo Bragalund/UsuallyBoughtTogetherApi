@@ -27,7 +27,7 @@ namespace UsuallyBoughtTogetherApi.tests.TestUtils
                 services.AddDbContext<PredictionContext>(options =>
                 {
                     options.UseSqlite(connection);
-                    options.UseInternalServiceProvider(serviceProvider);
+                   // options.UseInternalServiceProvider(serviceProvider);
                 });
                 
                 

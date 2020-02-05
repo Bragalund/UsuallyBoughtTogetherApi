@@ -26,10 +26,11 @@ namespace UsuallyBoughtTogetherApi.tests.tests
         }
 
         [Fact]
-        public async void testAddingProducts_whenAddingList_ThereShouldBeProducedProductEntryEntitiesInDatabase()
+        public async void testAddingProducts_whenAddingList_controllerShouldReturn201()
         { 
             // ARRANGE
             var productIds = ObjectCreator.CreateListOfInts();
+            var countOfOriginalList = productIds.Count;
             var serializedProductIds = JsonConvert.SerializeObject(productIds);
             var stringContent = new StringContent(serializedProductIds, Encoding.UTF8, "application/json");
             
@@ -41,16 +42,8 @@ namespace UsuallyBoughtTogetherApi.tests.tests
             var contentAsString = await result.Content.ReadAsStringAsync();
             var deserializedResult = JsonConvert.DeserializeObject<List<ProductEntryEntity>>(contentAsString);
             Assert.NotEmpty(deserializedResult);
-        }
-
-        [Fact]
-        public async void test_whenApiIsRunning_ValuesControllerShouldReturn200Ok()
-        {
-            // Arrange
-            var defaultPage = await _httpClient.GetAsync("/api/values");
-
-            // Assert
-            Assert.Equal(HttpStatusCode.OK, defaultPage.StatusCode);
+            Assert.Equal(countOfOriginalList * 2, deserializedResult.Count);
+            Assert.Contains(deserializedResult[0].ProductId, productIds);
         }
     }
 }

@@ -27,7 +27,8 @@ namespace UsuallyBoughtTogetherApi.Repositories
 
         public List<ProductEntryEntity> SaveProductEntryEntities(List<ProductEntryEntity> productEntryEntities)
         {
-            throw new NotImplementedException();
+            _dbContext.ProductEntryEntities.AddRange(productEntryEntities);
+            return productEntryEntities;
         }
 
         public List<ProductEntryEntity> DeleteProductEntryEntitiesOlderThanDate(DateTime dateTime)

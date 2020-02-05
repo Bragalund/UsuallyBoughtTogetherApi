@@ -74,7 +74,7 @@ namespace UsuallyBoughtTogetherApi
                 c.IncludeXmlComments(xmlPath);
             });
             
-            // 
+            // Adding controllers 
             services.AddControllers();
 
             // Dependecy injection (Transient)

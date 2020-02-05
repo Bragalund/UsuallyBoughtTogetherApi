@@ -20,7 +20,7 @@ namespace UsuallyBoughtTogetherApi.Controllers
         public IActionResult AddProductEntriesForListOfIds(List<int> productIds)
         {
             var savedProductEntries = _dataService.CreateAllCombinationsOfProductsAndSave(productIds);
-            return Ok(savedProductEntries);
+            return Created("/api/productentries",savedProductEntries);
         }
     }
 }

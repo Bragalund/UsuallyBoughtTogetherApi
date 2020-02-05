@@ -42,11 +42,7 @@ namespace UsuallyBoughtTogetherApi.Services
             foreach (var productEntryEntity in _productEntryDataRepo.GetAssociatedVareIds(id))
             {
                 var prediction = predictionEngine.Predict(
-                    new ProductEntryDto()
-                    {
-                        ProductId = id,
-                        CoPurchaseProductId = productEntryEntity.CoPurchaseProductId
-                    });
+                    new ProductEntryDto(id, productEntryEntity.CoPurchaseProductId));
                 coPurchasePredictionResultDtos.Add(new CoPurchasePredictionResultDto(prediction.Score, productEntryEntity.CoPurchaseProductId));
             }
             
