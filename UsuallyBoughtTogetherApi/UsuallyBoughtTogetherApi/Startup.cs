@@ -80,6 +80,7 @@ namespace UsuallyBoughtTogetherApi
             // Dependecy injection (Transient)
             services.AddTransient<IPredictionService, PredictionService>();
             services.AddTransient<IProductEntryDataRepo, ProductEntryDataRepo>();
+            services.AddTransient<IDataService, DataService>();
 
             // Dependency injection (singleton)
             services.AddSingleton<MLContext>();

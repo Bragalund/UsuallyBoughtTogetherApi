@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using UsuallyBoughtTogetherApi.Constants;
 
-namespace UsuallyBoughtTogetherApi.tests
+namespace UsuallyBoughtTogetherApi.tests.TestUtils
 {
     public class CustomWebApplicationFactory<T> : WebApplicationFactory<Startup>
     {
