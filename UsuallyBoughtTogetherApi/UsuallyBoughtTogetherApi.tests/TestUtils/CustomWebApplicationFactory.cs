@@ -38,6 +38,10 @@ namespace UsuallyBoughtTogetherApi.tests.TestUtils
                 using (var scope = sp.CreateScope())
                 {
                     var scopedServices = scope.ServiceProvider;
+                    var predictionContext = scopedServices.GetService<PredictionContext>();
+                    predictionContext.ProductEntryEntities.AddRange(ObjectCreator.CreateListOfProductEntries());
+                    
+                    
                 }
             });
         }

@@ -28,6 +28,10 @@ namespace UsuallyBoughtTogetherApi.Services
         private IDataView LoadTrainingDataIntoMlContext(DateTime fromDateTime)
         {
             var productEntryEntities = _productEntryDataRepo.GetAllProductEntryEntitiesFromDaysBackInTime(fromDateTime);
+            if (!productEntryEntities.Any())
+            {
+                return null;
+            }
             return mlContext.Data.LoadFromEnumerable(productEntryEntities);
         }
 
@@ -36,6 +40,10 @@ namespace UsuallyBoughtTogetherApi.Services
             var options = CreateOptionsForModel(label, alpha, lambda, c);
             var est = mlContext.Recommendation().Trainers.MatrixFactorization(options);
             var trainingData = LoadTrainingDataIntoMlContext(fromTime);
+            if (trainingData == null)
+            {
+                return null;
+            }
             var model = est.Fit(trainingData);
             mlContext.Model.Save(model, trainingData.Schema, FilePathConstants.RecommenderModelPath);
             return model;
